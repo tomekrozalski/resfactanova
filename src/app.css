@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: 'Titillium';
+		font-style: normal;
+		font-weight: 700;
+		src: url('/fonts/TitilliumWeb-SemiBold.ttf') format('truetype');
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Titillium';
+		font-style: normal;
+		font-weight: 400;
+		src: url('/fonts/TitilliumWeb-Light.ttf') format('truetype');
+		font-display: swap;
+	}
+
+	body {
+		background-image: url('/images/background-top.jpg'), url('/images/background-bottom.jpg');
+		background-image: image-set(
+				'/images/background-top.avif' type('image/avif'),
+				'/images/background-top.webp' type('image/webp'),
+				'/images/background-top.jpg' type('image/jpeg')
+			),
+			image-set(
+				'/images/background-bottom.webp' type('image/webp'),
+				'/images/background-bottom.jpg' type('image/jpeg')
+			);
+		background-repeat: repeat-x;
+		background-size: 700px, 400px;
+		background-position-x: center;
+		background-position-y: top, bottom;
+	}
+
+	/* body {
+		@apply text-lg font-normal;
+	} */
+}
