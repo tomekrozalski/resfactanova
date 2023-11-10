@@ -12,6 +12,8 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
+		"@fortawesome/pro-light-svg-icons": "^6.4.2",
+		"@fortawesome/pro-regular-svg-icons": "^6.4.2",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -26,6 +28,7 @@
 		"prettier-plugin-tailwindcss": "^0.5.7",
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
+		"svelte-fa": "^3.0.4",
 		"tailwindcss": "^3.3.5",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
