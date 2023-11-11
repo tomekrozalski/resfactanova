@@ -4,8 +4,8 @@
 	import ContrastSwitcher from './ContrastSwitcher.svelte';
 </script>
 
-<header class="flex gap-8 p-5">
-	<div class="flex items-center">
+<header class="grid grid-cols-3 text-base">
+	<div class="flex items-center p-5">
 		<h1>
 			<a href="/"><Logo /></a>
 		</h1>
@@ -18,15 +18,15 @@
 			</a>
 		</h2>
 	</div>
-	<div class="flex flex-grow justify-between">
-		<div class="flex h-[58px] flex-grow items-center justify-center">
+	<div class="col-span-2 flex justify-between">
+		<div class="flex items-start px-10 py-5">
 			<LargeFontSwitcher />
 			<ContrastSwitcher />
 		</div>
-		<div class="flex gap-4">
+		<div class="flex gap-4 p-5">
 			<a href="http://www.pwm.com.pl/">
 				<img
-					alt=""
+					alt="PWM Edition"
 					class="h-[58px] w-[58px]"
 					src="/images/logos/pwm-edition-1x.webp"
 					srcset="/images/logos/pwm-edition-1x.webp 1x, /images/logos/pwm-edition-2x.webp 2x"
@@ -34,7 +34,7 @@
 			</a>
 			<a href="http://www.muzykologia.amu.edu.pl/">
 				<img
-					alt=""
+					alt="Instytut Muzykologii, Uniwersytet Adama Mickiewicza w Poznaniu"
 					class="h-[55px] w-[285px]"
 					src="/images/logos/muzykologia-poznan-1x.webp"
 					srcset="/images/logos/muzykologia-poznan-1x.webp 1x, /images/logos/muzykologia-poznan-2x.webp 2x"

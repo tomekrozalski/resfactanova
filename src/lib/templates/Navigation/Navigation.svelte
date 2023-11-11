@@ -4,7 +4,7 @@
 	import RandomArticle from './RandomArticle.svelte';
 </script>
 
-<nav class="flex flex-col pl-5 font-serif">
+<nav class="flex flex-col pl-5 font-serif text-base">
 	<ul class="bg-gray-800 mb-4 rounded-l-lg pb-2">
 		<NavigationItem name="Aktualności" url="/" />
 		<NavigationItem name="Pismo" url="/pismo" />

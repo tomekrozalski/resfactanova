@@ -11,9 +11,8 @@
 </script>
 
 <li
-	class={isLast
-		? 'transition-all'
-		: 'transition-all after:ml-2 after:block after:h-[1px] after:bg-white'}
+	class={isLast ? '' : 'after:ml-2 after:block after:h-[1px] after:bg-white'}
+	style="transition: padding 150ms"
 	class:pl-6={!isActive}
 >
 	<a

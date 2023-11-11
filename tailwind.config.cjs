@@ -1,5 +1,4 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
-// import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,18 +6,25 @@ export default {
 	darkMode: 'class',
 	theme: {
 		colors: {
-			black: '#2d2d28',
+			black: 'rgb(var(--color-black) / <alpha-value>)',
 			white: '#fff',
-			red: '#915c3a',
-			blue: '#5593a9',
+			red: 'rgb(var(--color-red) / <alpha-value>)',
+			blue: 'rgb(var(--color-blue) / <alpha-value>)',
 			yellow: '#ebead2',
 			gray: {
-				200: '#555555',
-				400: '#999994',
-				600: '#cbcbc9',
-				800: '#e3e3e1',
-				900: '#eeeeed'
+				200: 'rgb(var(--color-gray-200) / <alpha-value>)',
+				400: 'rgb(var(--color-gray-400) / <alpha-value>)',
+				600: 'rgb(var(--color-gray-600) / <alpha-value>)',
+				800: 'rgb(var(--color-gray-800) / <alpha-value>)',
+				900: 'rgb(var(--color-gray-900) / <alpha-value>)'
 			}
+		},
+		fontSize: {
+			xs: 'var(--font-size-xs)',
+			sm: 'var(--font-size-sm)',
+			base: 'var(--font-size-base)',
+			lg: 'var(--font-size-lg)',
+			xl: 'var(--font-size-xl)'
 		},
 		fontFamily: {
 			serif: ['Titillium', ...defaultTheme.fontFamily.serif],

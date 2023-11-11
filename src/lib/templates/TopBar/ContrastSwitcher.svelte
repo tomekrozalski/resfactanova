@@ -17,7 +17,9 @@
 </script>
 
 <button
-	class="mr-3 rounded bg-yellow p-2 text-sm transition-colors hover:bg-blue hover:text-white"
+	class="mr-3 rounded border-2 bg-yellow p-2 text-sm transition-colors hover:bg-blue hover:text-white"
+	class:border-blue={isDarkMode}
+	class:border-yellow={!isDarkMode}
 	on:click={toggleDarkMode}
 	type="button"
 	title="{isDarkMode ? 'Wyłącz' : 'Włącz'} tryb wysokiego kontrastu"
