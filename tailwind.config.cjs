@@ -13,12 +13,16 @@ export default {
 			blue: '#5593a9',
 			yellow: '#ebead2',
 			gray: {
-				400: '#999994'
+				200: '#555555',
+				400: '#999994',
+				600: '#cbcbc9',
+				800: '#e3e3e1',
+				900: '#eeeeed'
 			}
 		},
 		fontFamily: {
 			serif: ['Titillium', ...defaultTheme.fontFamily.serif],
-			sans: ['Roboto', 'arial', ...defaultTheme.fontFamily.sans]
+			sans: ['Roboto', ...defaultTheme.fontFamily.sans]
 		}
 	},
 	plugins: []

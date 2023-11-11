@@ -14,8 +14,40 @@
 	@font-face {
 		font-family: 'Titillium';
 		font-style: normal;
+		font-weight: 500;
+		src: url('/fonts/TitilliumWeb-Regular.ttf') format('truetype');
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Titillium';
+		font-style: normal;
 		font-weight: 400;
 		src: url('/fonts/TitilliumWeb-Light.ttf') format('truetype');
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Roboto';
+		font-style: normal;
+		font-weight: 700;
+		src: url('/fonts/Roboto-Bold.ttf') format('truetype');
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Roboto';
+		font-style: normal;
+		font-weight: 400;
+		src: url('/fonts/Roboto-Regular.ttf') format('truetype');
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Roboto';
+		font-style: italic;
+		font-weight: 400;
+		src: url('/fonts/Roboto-Italic.ttf') format('truetype');
 		font-display: swap;
 	}
 
@@ -36,7 +68,31 @@
 		background-position-y: top, bottom;
 	}
 
-	/* body {
-		@apply text-lg font-normal;
-	} */
+	article h3 {
+		margin-bottom: theme('spacing.6');
+		font-family: theme('fontFamily.serif');
+		font-size: theme('fontSize.xl');
+		font-weight: theme('fontWeight.bold');
+		color: theme('colors.black');
+	}
+
+	article h4 {
+		margin-block: theme('spacing.6');
+		font-family: theme('fontFamily.serif');
+		font-size: theme('fontSize.lg');
+		font-weight: theme('fontWeight.medium');
+		color: theme('colors.black');
+	}
+
+	article a {
+		color: theme('colors.red');
+	}
+
+	article a:hover {
+		text-decoration: underline;
+	}
+
+	article p {
+		margin-block: theme('spacing.6');
+	}
 }

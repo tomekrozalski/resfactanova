@@ -1,31 +1,7 @@
 <script lang="ts">
-	import Fa from 'svelte-fa';
-	import {
-		faCircleHalfStroke as contractModeIcon,
-		faTextSize as largeTextModeIcon
-	} from '@fortawesome/pro-regular-svg-icons';
-	import {
-		faCircleHalfStroke as regularModeIcon,
-		faTextSize as regularTextModeIcon
-	} from '@fortawesome/pro-light-svg-icons';
 	import Logo from './Logo.svelte';
-
-	let isDarkMode = false;
-	let isLargeFontMode = false;
-
-	const toggleLargeFontMode = () => {
-		isLargeFontMode = !isLargeFontMode;
-	};
-
-	const toggleDarkMode = () => {
-		if (isDarkMode) {
-			document.documentElement.classList.remove('dark');
-		} else {
-			document.documentElement.classList.add('dark');
-		}
-
-		isDarkMode = !isDarkMode;
-	};
+	import LargeFontSwitcher from './LargeFontSwitcher.svelte';
+	import ContrastSwitcher from './ContrastSwitcher.svelte';
 </script>
 
 <header class="flex gap-8 p-5">
@@ -44,29 +20,25 @@
 	</div>
 	<div class="flex flex-grow justify-between">
 		<div class="flex h-[58px] flex-grow items-center justify-center">
-			<button
-				class="mr-3 rounded bg-yellow p-2 text-sm transition-colors hover:bg-blue hover:text-white"
-				on:click={toggleLargeFontMode}
-				type="button"
-				title="{isLargeFontMode ? 'Wyłącz' : 'Włącz'} duży rozmiar tekstu"
-			>
-				<Fa icon={isLargeFontMode ? regularTextModeIcon : largeTextModeIcon} size="2.5x" />
-			</button>
-			<button
-				class="mr-3 rounded bg-yellow p-2 text-sm transition-colors hover:bg-blue hover:text-white"
-				on:click={toggleDarkMode}
-				type="button"
-				title="{isDarkMode ? 'Wyłącz' : 'Włącz'} tryb wysokiego kontrastu"
-			>
-				<Fa icon={isDarkMode ? regularModeIcon : contractModeIcon} size="2.5x" />
-			</button>
+			<LargeFontSwitcher />
+			<ContrastSwitcher />
 		</div>
 		<div class="flex gap-4">
 			<a href="http://www.pwm.com.pl/">
-				<img alt="" class="h-[58px]" src="/images/pwm-edition.jpg" />
+				<img
+					alt=""
+					class="h-[58px] w-[58px]"
+					src="/images/logos/pwm-edition-1x.webp"
+					srcset="/images/logos/pwm-edition-1x.webp 1x, /images/logos/pwm-edition-2x.webp 2x"
+				/>
 			</a>
 			<a href="http://www.muzykologia.amu.edu.pl/">
-				<img alt="" class="h-[55px]" src="/images/muzykologia.png" />
+				<img
+					alt=""
+					class="h-[55px] w-[285px]"
+					src="/images/logos/muzykologia-poznan-1x.webp"
+					srcset="/images/logos/muzykologia-poznan-1x.webp 1x, /images/logos/muzykologia-poznan-2x.webp 2x"
+				/>
 			</a>
 		</div>
 	</div>
