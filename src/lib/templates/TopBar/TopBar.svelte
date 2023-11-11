@@ -4,12 +4,12 @@
 	import ContrastSwitcher from './ContrastSwitcher.svelte';
 </script>
 
-<header class="grid grid-cols-3 text-base">
+<header class="text-base lg:grid lg:grid-cols-3">
 	<div class="flex items-center p-5">
 		<h1>
 			<a href="/"><Logo /></a>
 		</h1>
-		<h2 class="w-28">
+		<h2 class="lg:w-28">
 			<a
 				href="/"
 				class="text-gray-400 block px-6 py-4 font-serif font-normal transition-colors hover:text-black"
@@ -18,12 +18,12 @@
 			</a>
 		</h2>
 	</div>
-	<div class="col-span-2 flex justify-between">
-		<div class="flex items-start px-10 py-5">
+	<div class="flex flex-col-reverse lg:col-span-2 lg:flex-row lg:justify-between">
+		<div class="hidden items-start p-5 lg:flex lg:pl-10">
 			<LargeFontSwitcher />
 			<ContrastSwitcher />
 		</div>
-		<div class="flex gap-4 p-5">
+		<div class="flex shrink-0 gap-4 px-5 lg:py-5">
 			<a href="http://www.pwm.com.pl/">
 				<img
 					alt="PWM Edition"
