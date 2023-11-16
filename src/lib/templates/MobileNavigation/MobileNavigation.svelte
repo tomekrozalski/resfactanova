@@ -1,13 +1,12 @@
 <script lang="ts">
-	import Fa from 'svelte-fa';
-	import { faBars } from '@fortawesome/pro-solid-svg-icons';
+	import { fly } from 'svelte/transition';
+	import LargeFontSwitcher from '../TopBar/LargeFontSwitcher.svelte';
+	import ContrastSwitcher from '../TopBar/ContrastSwitcher.svelte';
+	import MobileNavigationButton from './MobileNavigationButton.svelte';
 	import MobileNavigationItem from './MobileNavigationItem.svelte';
 
 	let isNavigationOpened = false;
 	let scrollPosition = 0;
-	let y = 0;
-
-	$: isInversed = y > 100;
 
 	const toggleNavigation = () => {
 		if (isNavigationOpened) {
@@ -26,33 +25,29 @@
 			isNavigationOpened = true;
 		}
 	};
+
+	// transition:fly={{ x: '100vw', opacity: 100, duration: 50000 }}
 </script>
 
-<svelte:window bind:scrollY={y} />
-
-<button
-	type="button"
-	on:click={toggleNavigation}
-	class="fixed right-2 top-2 z-30 flex items-center rounded p-4 lg:hidden"
-	class:bg-black={isInversed}
-	class:text-white={isInversed}
-	class:bg-white={!isInversed}
-	class:text-black={!isInversed}
->
-	<Fa icon={faBars} size="2x" />
-</button>
+<MobileNavigationButton on:click={toggleNavigation} />
 
 {#if isNavigationOpened}
-	<nav class="fixed inset-0 z-20 bg-white">
-		<ul class="bg-gray-800 mt-24 pb-2">
-			<MobileNavigationItem name="Aktualności" url="/" />
-			<MobileNavigationItem name="Pismo" url="/pismo" />
-			<MobileNavigationItem name="Dla Autorów" url="/wskazowki" />
-			<MobileNavigationItem name="Archiwum" url="/archiwum" />
-			<MobileNavigationItem name="Biblioteka" url="/biblioteka" />
-			<MobileNavigationItem name="In Memoriam" url="/in-memoriam" />
-			<MobileNavigationItem name="Redakcja" url="/redakcja" />
-			<MobileNavigationItem name="Kontakt" isLast url="/kontakt" />
+	<nav class="fixed inset-0 z-20 bg-white" transition:fly={{ x: '100vw', opacity: 100 }}>
+		<ul class="bg-gray-800 mt-24">
+			<MobileNavigationItem name="Aktualności" url="/" {toggleNavigation} />
+			<MobileNavigationItem name="Pismo" url="/pismo" {toggleNavigation} />
+			<MobileNavigationItem name="Dla Autorów" url="/wskazowki" {toggleNavigation} />
+			<MobileNavigationItem name="Archiwum" url="/archiwum" {toggleNavigation} />
+			<MobileNavigationItem name="Biblioteka" url="/biblioteka" {toggleNavigation} />
+			<MobileNavigationItem name="In Memoriam" url="/in-memoriam" {toggleNavigation} />
+			<MobileNavigationItem name="Redakcja" url="/redakcja" {toggleNavigation} />
+			<MobileNavigationItem name="Kontakt" isLast url="/kontakt" {toggleNavigation} />
+		</ul>
+		<ul class="mt-5 p-5">
+			<li class="mb-2 flex items-center"><LargeFontSwitcher /> duży rozmiar tekstu</li>
+			<li class="flex items-center">
+				<ContrastSwitcher /> tryb wysokiego kontrastu
+			</li>
 		</ul>
 	</nav>
 {/if}

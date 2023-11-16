@@ -17,12 +17,12 @@
 </script>
 
 <button
-	class="mr-3 rounded border-2 bg-yellow p-2 text-sm transition-colors hover:bg-blue hover:text-white"
+	class="mr-3 flex h-14 w-14 items-center justify-center rounded border-2 bg-yellow text-sm transition-colors hover:border-blue hover:bg-blue hover:text-white"
 	class:border-blue={isLargeFontMode}
 	class:border-yellow={!isLargeFontMode}
 	on:click={toggleLargeFontMode}
 	type="button"
 	title="{isLargeFontMode ? 'Wyłącz' : 'Włącz'} duży rozmiar tekstu"
 >
-	<Fa icon={isLargeFontMode ? regularTextModeIcon : largeTextModeIcon} size="2.5x" />
+	<Fa icon={isLargeFontMode ? regularTextModeIcon : largeTextModeIcon} size="2x" />
 </button>
