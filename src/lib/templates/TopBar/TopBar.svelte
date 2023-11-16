@@ -1,7 +1,7 @@
 <script lang="ts">
+	import LargeFontSwitcher from '../Accessibility/LargeFontSwitcher.svelte';
+	import ContrastSwitcher from '../Accessibility/ContrastSwitcher.svelte';
 	import Logo from './Logo.svelte';
-	import LargeFontSwitcher from './LargeFontSwitcher.svelte';
-	import ContrastSwitcher from './ContrastSwitcher.svelte';
 </script>
 
 <header class="text-base lg:grid lg:grid-cols-3">

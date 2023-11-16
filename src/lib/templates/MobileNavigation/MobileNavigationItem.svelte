@@ -19,7 +19,7 @@
 	<a
 		href={url}
 		on:click={toggleNavigation}
-		class="flex items-center justify-between px-4 py-3 transition-colors"
+		class="flex items-center justify-between px-4 py-3 text-base transition-colors"
 		class:bg-black={isActive}
 		class:text-white={isActive}
 		class:rounded-l-lg={!isActive}

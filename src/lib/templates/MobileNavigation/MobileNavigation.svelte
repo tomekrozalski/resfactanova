@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import LargeFontSwitcher from '../TopBar/LargeFontSwitcher.svelte';
-	import ContrastSwitcher from '../TopBar/ContrastSwitcher.svelte';
+	import LargeFontSwitcher from '../Accessibility/LargeFontSwitcher.svelte';
+	import ContrastSwitcher from '../Accessibility/ContrastSwitcher.svelte';
 	import MobileNavigationButton from './MobileNavigationButton.svelte';
 	import MobileNavigationItem from './MobileNavigationItem.svelte';
 
@@ -25,14 +25,12 @@
 			isNavigationOpened = true;
 		}
 	};
-
-	// transition:fly={{ x: '100vw', opacity: 100, duration: 50000 }}
 </script>
 
 <MobileNavigationButton on:click={toggleNavigation} />
 
 {#if isNavigationOpened}
-	<nav class="fixed inset-0 z-20 bg-white" transition:fly={{ x: '100vw', opacity: 100 }}>
+	<nav class="fixed inset-0 z-20 bg-white lg:hidden" transition:fly={{ x: '100vw', opacity: 100 }}>
 		<ul class="bg-gray-800 mt-24">
 			<MobileNavigationItem name="Aktualności" url="/" {toggleNavigation} />
 			<MobileNavigationItem name="Pismo" url="/pismo" {toggleNavigation} />

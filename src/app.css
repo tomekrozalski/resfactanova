@@ -87,7 +87,7 @@
 		font-display: swap;
 	}
 
-	body {
+	.wrapper {
 		background-image: url('/images/background-top.jpg'), url('/images/background-bottom.jpg');
 		background-image: image-set(
 				'/images/background-top.avif' type('image/avif'),
