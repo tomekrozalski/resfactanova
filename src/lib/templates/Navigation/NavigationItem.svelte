@@ -17,9 +17,11 @@
 >
 	<a
 		href={url}
-		class="flex items-center justify-between rounded-l-lg px-4 py-1 transition-colors"
+		class="flex items-center justify-between rounded-l-lg px-4 py-1
+			transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
 		class:bg-black={isActive}
 		class:text-white={isActive}
+		class:focus-visible:bg-gray-600={!isActive}
 		class:hover:bg-gray-600={!isActive}
 	>
 		{name}

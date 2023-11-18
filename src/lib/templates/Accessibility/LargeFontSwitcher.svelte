@@ -16,7 +16,10 @@
 </script>
 
 <button
-	class="mr-3 flex h-14 w-14 items-center justify-center rounded border-2 bg-yellow text-sm transition-colors hover:border-blue hover:bg-blue hover:text-white"
+	class="mr-3 flex h-14 w-14 items-center justify-center rounded border-2 bg-yellow text-sm transition-colors
+		hover:border-blue hover:bg-blue hover:text-white
+		focus-visible:rounded-none focus-visible:border-blue focus-visible:bg-blue focus-visible:text-white
+		focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-4"
 	class:border-blue={$isLargeTextMode}
 	class:border-yellow={!$isLargeTextMode}
 	on:click={toggleLargeFontMode}

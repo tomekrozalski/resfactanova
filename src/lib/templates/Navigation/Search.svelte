@@ -9,12 +9,14 @@
 		<input
 			id="search"
 			type="text"
-			class="border-gray-800 focus:border-gray-600 peer w-full rounded border px-2 py-1 text-sm focus:outline-none dark:border-black dark:p-3"
+			class="border-gray-800 focus:border-gray-600 peer w-full rounded border px-2 py-1 text-sm focus:outline-none focus-visible:rounded-none focus-visible:outline-none
+			focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2 dark:border-black dark:p-3"
 		/>
 		<button
 			aria-label="Rozpocznij wyszukiwanie"
 			type="submit"
-			class="text-gray-400 absolute bottom-0 right-0 top-0 px-3 peer-focus:text-black dark:px-3"
+			class="text-gray-400 absolute bottom-0 right-0 top-0 px-3 focus-visible:text-black focus-visible:outline-none
+			 focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2 peer-focus:text-black dark:px-3"
 		>
 			<Fa icon={faMagnifyingGlass} />
 		</button>
