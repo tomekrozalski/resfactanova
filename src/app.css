@@ -108,8 +108,13 @@
 		margin-bottom: theme('spacing.6');
 		font-family: theme('fontFamily.serif');
 		font-size: theme('fontSize.xl');
-		font-weight: theme('fontWeight.bold');
+		font-weight: theme('fontWeight.normal');
 		color: theme('colors.black');
+	}
+
+	article h3 strong {
+		text-transform: uppercase;
+		font-weight: theme('fontWeight.bold');
 	}
 
 	article h4 {

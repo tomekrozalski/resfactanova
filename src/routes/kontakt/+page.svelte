@@ -1,4 +1,4 @@
-<h3>Kontakt Res Facta Nova</h3>
+<h3>Kontakt <strong>Res Facta Nova</strong></h3>
 
 <p>
 	Redakcja Res Facta Nova<br />
