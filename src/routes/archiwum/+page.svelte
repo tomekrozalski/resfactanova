@@ -3,8 +3,7 @@
 	import { faBookmark } from '@fortawesome/pro-solid-svg-icons';
 
 	export let data;
-
-	$: ({ archive } = data);
+	$: ({ books } = data);
 </script>
 
 <h3>
@@ -13,7 +12,7 @@
 
 <div>
 	<ul class="list-inside list-disc">
-		{#each archive as { resFactaNumber, year }}
+		{#each books as { resFactaNumber, year }}
 			<li>Res Facta <a href="#numer-{resFactaNumber}">Numer {resFactaNumber} ({year})</a></li>
 		{/each}
 	</ul>
@@ -24,7 +23,7 @@
 <h3>Archiwum <strong>Res Facta</strong> / <strong>Res Facta</strong> Archive</h3>
 
 <ul>
-	{#each archive as { articles, resFactaNumber, year }}
+	{#each books as { articles, resFactaNumber, year }}
 		<li id="numer-{resFactaNumber}">
 			<h4 class="flex items-center">
 				<Fa icon={faBookmark} size="0.8x" class="mr-2 text-red" />

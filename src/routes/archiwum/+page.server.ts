@@ -1,31 +1,25 @@
 import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
-import getBooksQuery from '$lib/db/queries/getBooksQuery';
-import getBookArticlesQuery from '$lib/db/queries/getBookArticlesQuery';
-import combineArchiveData from '$lib/db/normalizers/combineArchiveData';
-import type { BookTypes } from '$lib/db/queries/getBooksQuery';
+import getArticles from '$lib/db/queries/getArticles';
+import formatArticle from '$lib/db/normalizers/formatArticle';
+import groupArticles from '$lib/db/normalizers/groupArticles';
 
 export const load = async () => {
-	const oldBooks = await contentfulFetch(getBooksQuery({ isResFactaNova: false }));
+	const response = await contentfulFetch(getArticles());
 
-	if (!oldBooks.ok) {
-		throw error(404, { message: 'Res Facta book not found' });
+	if (!response.ok) {
+		throw error(404, { message: 'Getting all articles from Contentful failed' });
 	}
 
-	const oldBooksData = await oldBooks.json();
-	const oldBooksList = oldBooksData?.data?.bookCollection?.items;
+	const { data } = await response.json();
+	const articles = data?.articleCollection?.items;
 
-	if (!oldBooksList?.length) {
-		throw error(404, { message: 'Res Facta book items not found' });
+	if (!articles?.length) {
+		throw error(404, { message: 'Getting all articles from Contentful. No data' });
 	}
 
-	const articles = await Promise.all(
-		oldBooksList.map(({ resFactaNumber }: BookTypes) =>
-			contentfulFetch(getBookArticlesQuery({ resFactaNumber }))
-				.then((response) => response.json())
-				.then(({ data }) => data.bookCollection.items[0])
-		)
-	);
+	const formattedArticles = articles.map(formatArticle);
+	const groupedArticles = groupArticles(formattedArticles);
 
-	return { archive: combineArchiveData(oldBooksList, articles) };
+	return { books: groupedArticles };
 };
