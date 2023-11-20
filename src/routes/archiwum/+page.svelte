@@ -23,18 +23,26 @@
 <h3>Archiwum <strong>Res Facta</strong> / <strong>Res Facta</strong> Archive</h3>
 
 <ul>
-	{#each books as { articles, resFactaNumber, year }}
+	{#each books as { articles, resFactaNovaNumber, resFactaNumber, year }}
 		<li id="numer-{resFactaNumber}">
 			<h4 class="flex items-center">
 				<Fa icon={faBookmark} size="0.8x" class="mr-2 text-red" />
-				Numer {resFactaNumber} ({year})
+				Numer
+				{#if resFactaNovaNumber}
+					{resFactaNovaNumber} ({resFactaNumber}) {year}
+				{:else}
+					{resFactaNumber} ({year})
+				{/if}
 			</h4>
 			<ul>
 				{#each articles as { authors, title }}
 					<li class="list-inside list-disc">
 						{#if authors?.length}
-							{#each authors as { fullName, slug }}
-								<a href="/autor/{slug}">{fullName}</a>
+							{#each authors as { fullName, slug }, index}
+								<a href="/autor/{slug}">{fullName}</a
+								>{#if authors.length > 1 && index + 1 !== authors.length}
+									,{' '}
+								{/if}
 							{/each}
 						{/if}{title}
 					</li>

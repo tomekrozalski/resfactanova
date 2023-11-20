@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
 import getArticlesByAuthor from '$lib/db/queries/getArticlesByAuthor';
+import getAuthor from '$lib/db/queries/getAuthor.js';
 import formatArticle from '$lib/db/normalizers/formatArticle';
 
 export const load = async ({ params }) => {
@@ -10,20 +11,25 @@ export const load = async ({ params }) => {
 		throw error(404, 'Incorrect param');
 	}
 
-	const response = await contentfulFetch(getArticlesByAuthor({ slug }));
+	const authorResponse = await contentfulFetch(getAuthor({ slug }));
+	const articlesResponse = await contentfulFetch(getArticlesByAuthor({ slug }));
 
-	if (!response.ok) {
+	if (!authorResponse.ok || !articlesResponse.ok) {
 		throw error(404, { message: 'Getting articles by author slug failed' });
 	}
 
-	const { data } = await response.json();
-	const articles = data?.articleCollection?.items;
+	const authorData = await authorResponse.json();
+	const author = authorData?.data?.authorCollection?.items?.[0];
 
-	if (!articles?.length) {
+	const articlesData = await articlesResponse.json();
+	const articles = articlesData?.data?.articleCollection?.items;
+
+	if (!author || !articles?.length) {
 		throw error(404, { message: 'Getting articles by author. No data' });
 	}
 
 	return {
-		articles: articles.map(formatArticle)
+		articles: articles.map(formatArticle),
+		author
 	};
 };

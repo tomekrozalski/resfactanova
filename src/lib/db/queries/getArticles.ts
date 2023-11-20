@@ -21,10 +21,10 @@ export type ArticleTypes = {
 
 const getArticles = () => `
 	{
-		articleCollection(order: sys_firstPublishedAt_ASC) {
+		articleCollection(limit: 500, order: sys_firstPublishedAt_ASC) {
 			items {
 				abstract
-				authorsCollection {
+				authorsCollection(limit: 10) {
 					items {
 						fullName
 						slug
