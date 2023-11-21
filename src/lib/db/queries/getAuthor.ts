@@ -1,8 +1,4 @@
-type GetAuthorQueryTypes = {
-	slug: string;
-};
-
-const getAuthor = ({ slug }: GetAuthorQueryTypes) => `
+const getAuthor = (slug: string) => `
   {
     authorCollection(limit: 1, where: { slug: "${slug}" }) {
       items {

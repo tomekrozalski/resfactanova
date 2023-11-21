@@ -19,9 +19,9 @@ export type ArticleTypes = {
 	title: string;
 };
 
-const getArticles = () => `
+const getArticleByNumber = (number: number) => `
 	{
-		articleCollection(limit: 500, order: sys_firstPublishedAt_ASC) {
+		articleCollection(order: sys_firstPublishedAt_ASC, where: { book: { resFactaNumber: ${number} }}) {
 			items {
 				abstract
 				authorsCollection(limit: 10) {
@@ -46,4 +46,4 @@ const getArticles = () => `
 	}
 `;
 
-export default getArticles;
+export default getArticleByNumber;

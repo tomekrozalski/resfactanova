@@ -11,8 +11,8 @@ export const load = async ({ params }) => {
 		throw error(404, 'Incorrect param');
 	}
 
-	const authorResponse = await contentfulFetch(getAuthor({ slug }));
-	const articlesResponse = await contentfulFetch(getArticlesByAuthor({ slug }));
+	const authorResponse = await contentfulFetch(getAuthor(slug));
+	const articlesResponse = await contentfulFetch(getArticlesByAuthor(slug));
 
 	if (!authorResponse.ok || !articlesResponse.ok) {
 		throw error(404, { message: 'Getting articles by author slug failed' });

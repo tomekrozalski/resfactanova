@@ -10,10 +10,20 @@
 	Archiwum <strong>indeks numerów</strong> / Archive <strong>index of the journal volumes</strong>
 </h3>
 
-<div>
+<div class="flex gap-6">
 	<ul class="list-inside list-disc">
-		{#each books as { resFactaNumber, year }}
+		{#each books.filter(({ resFactaNovaNumber }) => !resFactaNovaNumber) as { resFactaNumber, year }}
 			<li>Res Facta <a href="#numer-{resFactaNumber}">Numer {resFactaNumber} ({year})</a></li>
+		{/each}
+	</ul>
+	<ul class="list-inside list-disc">
+		{#each books.filter(({ resFactaNovaNumber }) => resFactaNovaNumber) as { resFactaNovaNumber, resFactaNumber, year }}
+			<li>
+				Res Facta Nova
+				<a href="#numer-{resFactaNumber}">
+					Numer {resFactaNovaNumber} ({resFactaNumber}) {year}
+				</a>
+			</li>
 		{/each}
 	</ul>
 </div>

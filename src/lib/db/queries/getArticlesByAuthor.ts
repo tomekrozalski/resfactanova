@@ -1,8 +1,4 @@
-type GetArticlesByAuthorQueryTypes = {
-	slug: string;
-};
-
-const getArticlesByAuthor = ({ slug }: GetArticlesByAuthorQueryTypes) => `
+const getArticlesByAuthor = (slug: string) => `
   {
     articleCollection(order: sys_firstPublishedAt_ASC, where: { authors: { slug: "${slug}" }}) {
       items {
