@@ -1,8 +1,10 @@
 import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
-import getArticlesByAuthor from '$lib/db/queries/getArticlesByAuthor';
-import getAuthor from '$lib/db/queries/getAuthor.js';
-import formatArticle from '$lib/db/normalizers/formatArticle';
+import getArticlesByAuthor from './utils/getArticlesByAuthor';
+import getAuthor from './utils/getAuthor.js';
+import formatArticle from './utils/formatArticle';
+import type { FormattedArticleTypes } from './utils/Article.d';
+import type { FormattedAuthorTypes } from './utils/Author.d';
 
 export const load = async ({ params }) => {
 	const slug = params.slug;
@@ -19,7 +21,7 @@ export const load = async ({ params }) => {
 	}
 
 	const authorData = await authorResponse.json();
-	const author = authorData?.data?.authorCollection?.items?.[0];
+	const author = authorData?.data?.authorCollection?.items?.[0] as FormattedAuthorTypes;
 
 	const articlesData = await articlesResponse.json();
 	const articles = articlesData?.data?.articleCollection?.items;
@@ -28,8 +30,10 @@ export const load = async ({ params }) => {
 		throw error(404, { message: 'Getting articles by author. No data' });
 	}
 
+	const formattedArticles: FormattedArticleTypes[] = articles.map(formatArticle);
+
 	return {
-		articles: articles.map(formatArticle),
+		articles: formattedArticles,
 		author
 	};
 };
