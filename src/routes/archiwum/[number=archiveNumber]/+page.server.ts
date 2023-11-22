@@ -1,8 +1,11 @@
 import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
-import getArticleByNumber from '$lib/db/queries/getArticleByNumber';
-import formatArticle from '$lib/db/normalizers/formatArticle';
-import groupArticles from '$lib/db/normalizers/groupArticles';
+import getArticleList from './utils/getArticleList';
+import getBookList from './utils/getBookList';
+import formatArticle from './utils/formatArticle';
+import formatBook from './utils/formatBook';
+import type { FormattedBookTypes } from './utils/Book.d';
+import type { FormattedArticleTypes } from './utils/Article.d';
 
 export const load = async ({ params }) => {
 	const number = params.number;
@@ -11,21 +14,25 @@ export const load = async ({ params }) => {
 		throw error(404, 'Incorrect param');
 	}
 
-	const response = await contentfulFetch(getArticleByNumber(Number(number)));
+	const booksResponse = await contentfulFetch(getBookList());
+	const articleResponse = await contentfulFetch(getArticleList(Number(number)));
 
-	if (!response.ok) {
-		throw error(404, { message: 'Getting all articles from Contentful failed' });
+	if (!booksResponse.ok || !articleResponse.ok) {
+		throw error(404, { message: 'Getting articles from Contentful failed' });
 	}
 
-	const { data } = await response.json();
-	const articles = data?.articleCollection?.items;
+	const booksData = await booksResponse.json();
+	const books = booksData?.data?.bookCollection?.items;
 
-	if (!articles?.length) {
-		throw error(404, { message: 'Getting all articles from Contentful. No data' });
+	const articlesData = await articleResponse.json();
+	const articles = articlesData?.data?.articleCollection?.items ?? [];
+
+	if (!books?.length) {
+		throw error(404, { message: 'Getting articles from Contentful. No data' });
 	}
 
-	const formattedArticles = articles.map(formatArticle);
-	const groupedArticles = groupArticles(formattedArticles);
+	const formattedBooks: FormattedBookTypes[] = books.map(formatBook(Number(number)));
+	const formattedArticles: FormattedArticleTypes[] = articles.map(formatArticle);
 
-	return { books: groupedArticles };
+	return { articles: formattedArticles, books: formattedBooks };
 };
