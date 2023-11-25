@@ -13,12 +13,13 @@
 <ul class="list-inside list-disc">
 	{#each articles as { authors, book, title }}
 		<li>
+			{#if book.isResFactaNova}
+				Res Facta Nova,
+			{:else}
+				Res Facta,
+			{/if}
 			<a href="/archiwum/{book.resFactaNumber}">
-				{#if book.isResFactaNova}
-					Res Facta Nova,
-				{:else}
-					Res Facta,
-				{/if} numer {book.resFactaNumber}
+				numer {book.resFactaNumber}
 				{#if book.isResFactaNova}
 					({book.resFactaNovaNumber}) {book.year}:
 				{:else}
