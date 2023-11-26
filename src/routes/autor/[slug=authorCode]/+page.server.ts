@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
 import getArticlesByAuthor from './utils/getArticlesByAuthor';
 import getAuthor from './utils/getAuthor.js';
-import formatArticle from './utils/formatArticle';
+import formatArticle from '$lib/templates/ArticleItem/formatArticle';
 import type { FormattedArticleTypes } from '$lib/templates/ArticleItem/Article.d';
 import type { FormattedAuthorTypes } from './utils/Author.d';
 
