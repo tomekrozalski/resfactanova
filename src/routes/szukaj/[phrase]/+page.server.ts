@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
 import formatArticle from './utils/formatArticle';
-import type { FormattedArticleTypes } from './utils/Article.d';
+import type { FormattedArticleTypes } from '$lib/templates/ArticleItem/Article.d';
 
 export const load = async ({ params }) => {
 	const phrase = params.phrase;
@@ -25,6 +25,13 @@ export const load = async ({ params }) => {
 							slug
 						}
 					}
+					book {
+						resFactaNumber
+						isResFactaNova
+						resFactaNovaNumber
+						notes
+						year
+					}
 					pdf {
 						url
 					}
@@ -42,10 +49,10 @@ export const load = async ({ params }) => {
 	const articles = articlesData?.data?.articleCollection?.items;
 
 	if (!articles?.length) {
-		return { articles: [] };
+		return { articles: [], phrase };
 	}
 
 	const formattedArticles: FormattedArticleTypes[] = articles.map(formatArticle);
 
-	return { articles: formattedArticles };
+	return { articles: formattedArticles, phrase };
 };

@@ -1,4 +1,4 @@
-import type { RawArticleTypes, FormattedArticleTypes } from './Article.d';
+import type { RawArticleTypes, FormattedArticleTypes } from '$lib/templates/ArticleItem/Article.d';
 
 const formatArticle = ({
 	abstract,

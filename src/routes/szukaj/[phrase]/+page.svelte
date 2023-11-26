@@ -1,18 +1,18 @@
 <script lang="ts">
+	import ArticleItem from '$lib/templates/ArticleItem/ArticleItem.svelte';
+
 	export let data;
+	$: ({ articles, phrase } = data);
 </script>
 
-<ul>
-	{#each data.articles as { abstract, authors, pdf, title }}
-		<li class="list-inside list-disc">
-			{#if authors?.length}
-				{#each authors as { fullName, slug }, index}
-					<a href="/autor/{slug}">{fullName}</a
-					>{#if authors.length > 1 && index + 1 !== authors.length}
-						,{' '}
-					{/if}
-				{/each}
-			{/if}{title}
-		</li>
-	{/each}
-</ul>
+<h3>Wyniki wyszukiwania dla frazy <strong>"{phrase}"</strong></h3>
+
+{#if articles.length}
+	<ul class="list-inside list-disc">
+		{#each articles as article}
+			<ArticleItem {article} />
+		{/each}
+	</ul>
+{:else}
+	Nic nie znaleziono. Spróbuj czegoś innego
+{/if}
