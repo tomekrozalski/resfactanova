@@ -19,4 +19,7 @@
 			{active.resFactaNumber} ({active.year})
 		{/if}
 	</h4>
+	{#if active.notes}
+		<p>{active.notes}</p>
+	{/if}
 {/if}

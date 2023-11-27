@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
 	import { faFilePdf } from '@fortawesome/pro-solid-svg-icons';
+	import Abstract from './Abstract.svelte';
 
 	export let article;
 	const { abstract, authors, pdf, title } = article;
@@ -16,4 +17,7 @@
 	{/if}{#if pdf}
 		<a href={pdf}>{title} <Fa icon={faFilePdf} size="0.8x" class="inline-block" /></a>
 	{:else}{title}{/if}
+	{#if abstract}
+		<Abstract {abstract} />
+	{/if}
 </li>

@@ -5,10 +5,10 @@
 
 	export let isLast = false;
 	export let name: string;
-	export let url: string;
+	export let url: string = '';
 
 	$: categoryName = $page.route.id?.split('/')?.slice(1, 2)?.[0] ?? '';
-	$: isActive = '/' + categoryName === url;
+	$: isActive = categoryName === url;
 </script>
 
 <li
@@ -17,7 +17,7 @@
 	class:pl-6={!isActive}
 >
 	<a
-		href={url}
+		href={'/' + url}
 		class="flex items-center justify-between rounded-l-lg px-4 py-1
 			transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
 		class:bg-black={isActive}
