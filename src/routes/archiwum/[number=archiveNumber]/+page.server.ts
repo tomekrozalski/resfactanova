@@ -34,5 +34,5 @@ export const load = async ({ params }) => {
 	const formattedBooks: FormattedBookTypes[] = books.map(formatBook(Number(number)));
 	const formattedArticles: FormattedArticleTypes[] = articles.map(formatArticle);
 
-	return { articles: formattedArticles, books: formattedBooks };
+	return { articles: formattedArticles, books: formattedBooks, pageName: 'archiwum' };
 };

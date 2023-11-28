@@ -5,7 +5,7 @@
 	$: ({ articles, author } = data);
 </script>
 
-<h3>{author.firstName} {author.lastName}</h3>
+<h3 class="-mb-4 font-serif text-xl font-bold text-black">{author.firstName} {author.lastName}</h3>
 
 {#if author.notes}
 	<p>{author.notes}</p>

@@ -34,6 +34,7 @@ export const load = async ({ params }) => {
 
 	return {
 		articles: formattedArticles,
-		author
+		author,
+		pageName: 'archiwum'
 	};
 };

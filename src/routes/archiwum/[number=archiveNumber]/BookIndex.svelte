@@ -4,7 +4,7 @@
 	export let books: FormattedBookTypes[];
 </script>
 
-<h3>
+<h3 class="mb-4 font-serif text-xl font-bold text-black">
 	Archiwum <strong>indeks numerów</strong> / Archive <strong>index of the journal volumes</strong>
 </h3>
 

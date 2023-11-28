@@ -1,29 +1,12 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
-import type { Document } from '@contentful/rich-text-types';
-
-type RawPageTypes = {
-	content?: {
-		json: Document;
-	};
-	title: string;
-};
-
-type FormattedPageTypes = {
-	content?: Document;
-	title: string;
-};
-
-// const formatPage = ({ content, title }: RawPageTypes): FormattedPageTypes => ({
-// 	...(content?.json ? { content: content.json } : {}),
-// 	...(content?.links ? { content: content.links } : {}),
-// 	title
-// });
 
 const getPageBySlug = async (slug: string) => {
+	const whereQuery = slug ? `slug: "${slug}"` : 'isMainPage: true';
+
 	const pageResponse = await contentfulFetch(`
     {
-      pageCollection(limit: 1, where: { isMainPage: true }) {
+      pageCollection(limit: 1, where: { ${whereQuery} }) {
         items {
           title
           content {
@@ -57,18 +40,21 @@ const getPageBySlug = async (slug: string) => {
         }
       }
     }
-
   `);
 
 	if (!pageResponse.ok) {
-		throw error(404, { message: 'Getting page data failed' });
+		throw error(404, { message: 'Getting page data failed1' });
 	}
 
 	const pageData = await pageResponse.json();
 	const page = pageData?.data?.pageCollection?.items?.[0];
 
-	if (!page.title || !page.content) {
-		throw error(404, { message: 'Getting page data failed' });
+	if (!page) {
+		throw error(404, { message: 'Not found' });
+	}
+
+	if (!page?.title || !page.content) {
+		throw error(404, { message: 'Page title or page content is empty' });
 	}
 
 	return page;

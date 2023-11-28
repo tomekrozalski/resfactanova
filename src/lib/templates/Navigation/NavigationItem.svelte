@@ -7,8 +7,7 @@
 	export let name: string;
 	export let url: string = '';
 
-	$: categoryName = $page.route.id?.split('/')?.slice(1, 2)?.[0] ?? '';
-	$: isActive = categoryName === url;
+	$: isActive = $page?.data?.pageName === url;
 </script>
 
 <li

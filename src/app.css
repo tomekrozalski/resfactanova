@@ -104,25 +104,9 @@
 		background-position-y: top, bottom;
 	}
 
-	article h3 {
-		margin-bottom: theme('spacing.6');
-		font-family: theme('fontFamily.serif');
-		font-size: theme('fontSize.xl');
-		font-weight: theme('fontWeight.normal');
-		color: theme('colors.black');
-	}
-
 	article h3 strong {
 		text-transform: uppercase;
 		font-weight: theme('fontWeight.bold');
-	}
-
-	article h4 {
-		margin-block: theme('spacing.6');
-		font-family: theme('fontFamily.serif');
-		font-size: theme('fontSize.lg');
-		font-weight: theme('fontWeight.medium');
-		color: theme('colors.black');
 	}
 
 	article a {

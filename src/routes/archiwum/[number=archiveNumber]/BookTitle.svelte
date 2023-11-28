@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SvelteMarkdown from 'svelte-markdown';
 	import Fa from 'svelte-fa';
 	import { faBookmark } from '@fortawesome/pro-solid-svg-icons';
 	import type { FormattedBookTypes } from './utils/Book';
@@ -7,10 +8,12 @@
 	$: active = books.find(({ isActive }) => isActive);
 </script>
 
-<h3>Archiwum <strong>Res Facta</strong> / <strong>Res Facta</strong> Archive</h3>
+<h3 class="mb-5 font-serif text-xl font-bold text-black">
+	Archiwum <strong>Res Facta</strong> / <strong>Res Facta</strong> Archive
+</h3>
 
 {#if active}
-	<h4 class="flex items-center">
+	<h4 class="mb-3 flex items-center font-serif text-lg font-medium text-black">
 		<Fa icon={faBookmark} size="0.8x" class="mr-2 text-red" />
 		Numer
 		{#if active.resFactaNovaNumber}
@@ -20,6 +23,6 @@
 		{/if}
 	</h4>
 	{#if active.notes}
-		<p>{active.notes}</p>
+		<SvelteMarkdown source={active.notes} />
 	{/if}
 {/if}
