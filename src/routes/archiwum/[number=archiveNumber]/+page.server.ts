@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
+import getPageBySlug from '$lib/db/layout/getPageBySlug';
 import getArticleList from './utils/getArticleList';
 import getBookList from './utils/getBookList';
 import formatArticle from './utils/formatArticle';
@@ -34,5 +35,12 @@ export const load = async ({ params }) => {
 	const formattedBooks: FormattedBookTypes[] = books.map(formatBook(Number(number)));
 	const formattedArticles: FormattedArticleTypes[] = articles.map(formatArticle);
 
-	return { articles: formattedArticles, books: formattedBooks, pageName: 'archiwum' };
+	const page = await getPageBySlug('archiwum');
+
+	return {
+		articles: formattedArticles,
+		books: formattedBooks,
+		pageName: 'archiwum',
+		title: page.title as string
+	};
 };

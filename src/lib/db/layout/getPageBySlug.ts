@@ -53,7 +53,7 @@ const getPageBySlug = async (slug: string) => {
 		throw error(404, { message: 'Not found' });
 	}
 
-	if (!page?.title || !page.content) {
+	if (!page?.title) {
 		throw error(404, { message: 'Page title or page content is empty' });
 	}
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let data;
 
-	const { content, title } = data;
+	$: ({ content, title } = data);
 </script>
 
 <svelte:head>

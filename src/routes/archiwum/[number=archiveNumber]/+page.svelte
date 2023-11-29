@@ -1,11 +1,16 @@
 <script lang="ts">
+	import getTitle from './utils/getTitle';
 	import BookIndex from './BookIndex.svelte';
 	import ArticleItem from './ArticleItem.svelte';
 	import BookTitle from './BookTitle.svelte';
 
 	export let data;
-	$: ({ articles, books } = data);
+	$: ({ articles, books, title } = data);
 </script>
+
+<svelte:head>
+	<title>{getTitle(title, books)}</title>
+</svelte:head>
 
 <BookIndex {books} />
 <BookTitle {books} />
