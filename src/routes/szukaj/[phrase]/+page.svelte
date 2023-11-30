@@ -5,7 +5,9 @@
 	$: ({ articles, phrase } = data);
 </script>
 
-<h3>Wyniki wyszukiwania dla frazy <strong>"{phrase}"</strong></h3>
+<h3 class="mb-6 font-serif text-xl font-bold text-black">
+	Wyniki wyszukiwania dla frazy <strong>"{phrase}"</strong>
+</h3>
 
 {#if articles.length}
 	<ul class="list-inside list-disc">
