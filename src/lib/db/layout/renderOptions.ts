@@ -28,7 +28,7 @@ const renderOptions = (links: LinksTypes) => {
 				`<p>${next(node.content).replace(/\n/g, '<br>')}</p>`,
 			[BLOCKS.HEADING_3]: (node: Node, next: unknown) =>
 				// @ts-expect-error 500
-				`<h3 class="font-serif mb-6 text-xl text-black font-bold">${next(node.content)}</h3>`,
+				`<h3 class="mb-6 font-serif text-xl text-black font-bold">${next(node.content)}</h3>`,
 			[BLOCKS.HEADING_4]: (node: Node, next: unknown) =>
 				// @ts-expect-error 500
 				`<h4 class="my-6 font-serif text-lg font-medium text-black">${next(node.content)}</h4>`,
