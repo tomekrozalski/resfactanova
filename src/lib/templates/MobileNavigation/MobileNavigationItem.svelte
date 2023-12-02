@@ -6,9 +6,9 @@
 	export let isLast = false;
 	export let name: string;
 	export let toggleNavigation: () => void;
-	export let url: string;
+	export let url: string = '';
 
-	$: isActive = $page.route.id === url;
+	$: isActive = $page?.data?.pageName === url;
 </script>
 
 <li
@@ -17,7 +17,7 @@
 	class:pl-6={!isActive}
 >
 	<a
-		href={url}
+		href={'/' + url}
 		on:click={toggleNavigation}
 		class="flex items-center justify-between px-4 py-3 text-base transition-colors"
 		class:bg-black={isActive}

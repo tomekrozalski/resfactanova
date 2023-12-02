@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
+	import { page } from '$app/stores';
 	import LargeFontSwitcher from '../Accessibility/LargeFontSwitcher.svelte';
 	import ContrastSwitcher from '../Accessibility/ContrastSwitcher.svelte';
 	import MobileNavigationButton from './MobileNavigationButton.svelte';
@@ -25,23 +26,28 @@
 			isNavigationOpened = true;
 		}
 	};
+
+	const pages = $page.data.pages;
 </script>
 
 <MobileNavigationButton on:click={toggleNavigation} />
 
 {#if isNavigationOpened}
-	<nav class="fixed inset-0 z-20 bg-white lg:hidden" transition:fly={{ x: '100vw', opacity: 100 }}>
-		<ul class="bg-gray-800 mt-24">
-			<MobileNavigationItem name="Aktualności" url="/" {toggleNavigation} />
-			<MobileNavigationItem name="Pismo" url="/pismo" {toggleNavigation} />
-			<MobileNavigationItem name="Dla Autorów" url="/wskazowki" {toggleNavigation} />
-			<MobileNavigationItem name="Archiwum" url="/archiwum" {toggleNavigation} />
-			<MobileNavigationItem name="Biblioteka" url="/biblioteka" {toggleNavigation} />
-			<MobileNavigationItem name="In Memoriam" url="/in-memoriam" {toggleNavigation} />
-			<MobileNavigationItem name="Redakcja" url="/redakcja" {toggleNavigation} />
-			<MobileNavigationItem name="Kontakt" isLast url="/kontakt" {toggleNavigation} />
+	<nav
+		class="fixed inset-0 z-20 overflow-y-scroll bg-white lg:hidden"
+		transition:fly={{ x: '100vw', opacity: 100 }}
+	>
+		<ul class="mt-24 bg-gray-800">
+			{#each pages as { menuName, slug }, index}
+				<MobileNavigationItem
+					name={menuName}
+					url={slug}
+					isLast={pages.length === index + 1}
+					{toggleNavigation}
+				/>
+			{/each}
 		</ul>
-		<ul class="mt-5 p-5">
+		<ul class="my-5 p-5">
 			<li class="mb-2 flex items-center"><LargeFontSwitcher /> duży rozmiar tekstu</li>
 			<li class="flex items-center">
 				<ContrastSwitcher /> tryb wysokiego kontrastu

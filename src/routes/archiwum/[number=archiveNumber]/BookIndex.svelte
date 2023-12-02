@@ -8,7 +8,7 @@
 	Archiwum <strong>indeks numerów</strong> / Archive <strong>index of the journal volumes</strong>
 </h3>
 
-<div class="flex gap-5">
+<div class="flex flex-col gap-5 lg:flex-row">
 	<ul class="list-inside list-disc">
 		{#each books.filter(({ resFactaNovaNumber }) => !resFactaNovaNumber) as { isActive, resFactaNumber, year }}
 			<li>
