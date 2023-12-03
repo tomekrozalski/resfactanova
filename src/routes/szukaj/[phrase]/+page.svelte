@@ -10,11 +10,13 @@
 </h3>
 
 {#if articles.length}
-	<ul class="list-inside list-disc">
-		{#each articles as article}
-			<ArticleItem {article} />
-		{/each}
-	</ul>
+	{#key articles}
+		<ul class="list-inside list-disc">
+			{#each articles as article}
+				<ArticleItem {article} />
+			{/each}
+		</ul>
+	{/key}
 {:else}
 	Nic nie znaleziono. Spróbuj czegoś innego
 {/if}
