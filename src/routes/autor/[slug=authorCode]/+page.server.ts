@@ -6,6 +6,12 @@ import formatArticle from '$lib/templates/ArticleItem/formatArticle';
 import type { FormattedArticleTypes } from '$lib/templates/ArticleItem/Article.d';
 import type { FormattedAuthorTypes } from './utils/Author.d';
 
+export const config = {
+	isr: {
+		expiration: 60
+	}
+};
+
 export const load = async ({ params }) => {
 	const slug = params.slug;
 

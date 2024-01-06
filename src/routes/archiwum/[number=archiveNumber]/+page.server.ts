@@ -8,6 +8,12 @@ import formatBook from './utils/formatBook';
 import type { FormattedBookTypes } from './utils/Book.d';
 import type { FormattedArticleTypes } from './utils/Article.d';
 
+export const config = {
+	isr: {
+		expiration: 60
+	}
+};
+
 export const load = async ({ params }) => {
 	const number = params.number;
 
