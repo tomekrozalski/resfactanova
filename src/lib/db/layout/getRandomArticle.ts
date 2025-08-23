@@ -2,8 +2,19 @@ import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
 import formatArticle from '$lib/templates/ArticleItem/formatArticle';
 import type { FormattedArticleTypes } from '$lib/templates/ArticleItem/Article.d';
+import { createClient } from 'redis';
+import { REDIS_URL } from '$env/static/private';
 
-const getRandomArticle = async () => {
+const redis = await createClient({ url: REDIS_URL }).connect();
+
+async function getArticlesCount(): Promise<number> {
+	const REDIS_KEY = 'articles-count';
+	const cache = await redis.get(REDIS_KEY);
+
+	if (cache) {
+		return cache;
+	}
+
 	const totalResponse = await contentfulFetch(`
     {
       articleCollection(where: { pdf_exists: true }) {
@@ -23,11 +34,16 @@ const getRandomArticle = async () => {
 		throw error(404, { message: 'Getting count of all articles failed' });
 	}
 
-	const skip = Math.floor(Math.random() * total);
+	await redis.set(REDIS_KEY, total);
 
+	return total;
+}
+
+async function getArticlesListChunk(pageIndex: number) {
+	const skip = pageIndex * 100;
 	const articleResponse = await contentfulFetch(`
     {
-      articleCollection (limit: 1, skip: ${skip}, where: { pdf_exists: true }) {
+      articleCollection (skip: ${skip}, limit: 100, where: { pdf_exists: true }) {
         items {
           abstract
           authorsCollection(limit: 10) {
@@ -57,15 +73,42 @@ const getRandomArticle = async () => {
 	}
 
 	const articleData = await articleResponse.json();
-	const article = articleData?.data?.articleCollection?.items?.[0];
+	const articles = articleData?.data?.articleCollection?.items;
 
-	if (!article) {
-		throw error(404, { message: 'Getting random article failed' });
+	if (!articles?.length) {
+		throw error(404, { message: 'Getting articles failed' });
 	}
 
-	const formattedArticle: FormattedArticleTypes = formatArticle(article);
+	return articles.map(formatArticle);
+}
 
-	return formattedArticle;
+async function getAllArticlesData(count: number): Promise<FormattedArticleTypes[]> {
+	const REDIS_KEY = 'articles-basic-data';
+	const cache = await redis.get(REDIS_KEY);
+
+	if (cache) {
+		return JSON.parse(cache);
+	}
+
+	const pages = Math.ceil(count / 100);
+	const allChunks = await Promise.all(
+		Array(pages)
+			.fill('')
+			.map((_, pageIndex) => getArticlesListChunk(pageIndex))
+	);
+
+	const allArticles = allChunks.flat();
+	await redis.set(REDIS_KEY, JSON.stringify(allArticles));
+
+	return allArticles;
+}
+
+const getRandomArticle = async () => {
+	const count = await getArticlesCount();
+	const articles = await getAllArticlesData(count);
+	const randomIndex = Math.floor(Math.random() * count);
+
+	return articles[randomIndex];
 };
 
 export default getRandomArticle;

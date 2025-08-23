@@ -1,7 +1,18 @@
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import contentfulFetch from '$lib/db/contentful-fetch';
+import { createClient } from 'redis';
+import { REDIS_URL } from '$env/static/private';
+
+const redis = await createClient({ url: REDIS_URL }).connect();
 
 const getPageBySlug = async (slug: string) => {
+	const REDIS_KEY = 'page-by-slug' + ':' + (slug || 'main');
+	const cache = await redis.get(REDIS_KEY);
+
+	if (cache) {
+		return JSON.parse(cache);
+	}
+
 	const whereQuery = slug ? `slug: "${slug}"` : 'isMainPage: true';
 
 	const pageResponse = await contentfulFetch(`
@@ -56,6 +67,8 @@ const getPageBySlug = async (slug: string) => {
 	if (!page?.title) {
 		throw error(404, { message: 'Page title or page content is empty' });
 	}
+
+	await redis.set(REDIS_KEY, JSON.stringify(page));
 
 	return page;
 };
