@@ -1,38 +1,30 @@
-# create-svelte
+## Tech Stack
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+The original version of [resfactanova.pl](https://resfactanova.pl) was built in **PHP**.
+In **November 2023**, the site was rewritten using **Svelte 4** and **SvelteKit**.
 
-## Creating a project
+Although the project has since been bumped to **Svelte 5**, the core implementation still relies on Svelte 4 conventions.
+For styling, the project uses **TailwindCSS v3**.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## CMS and Infrastructure
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+The project uses **Contentful** as its CMS.
+To avoid excessive API calls, a **Redis** caching layer has been added.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- The Redis cache can be cleared via a webhook at:
+  `POST /api/clear-cache`
+- Contentful is currently running on the **free plan**.
+- Hosting is provided by **Vercel**.
+- Redis is also hosted on **Vercel**.
 
-## Developing
+Currently, the application is deployed under a private Vercel account, but it can be migrated to another account without issues.
+The only requirement is to configure **Vercel Redis** and provide all environment variables listed in `.env.example`.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Environment Variables
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- `CONTENTFUL_ACCESS_TOKEN` – found in Contentful under **Settings → API Keys**
+- `CONTENTFUL_PREVIEW_ACCESS_TOKEN` – found in Contentful under **Settings → API Keys**
+- `CONTENTFUL_SPACE_ID` – found in Contentful under **Settings → General Settings**
+- `FONTAWESOME_NPM_AUTH_TOKEN` – currently linked to a private Font Awesome account, but can be switched to any other paid account
+- `REDIS_URL` – configure through Vercel Redis
+- `PRERENDER_REVALIDATE_KEY` – arbitrary webhook key, can be found in **Contentful → Clear Redis Cache webhook settings**
