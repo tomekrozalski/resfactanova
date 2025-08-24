@@ -14,9 +14,12 @@
 				,{' '}
 			{/if}
 		{/each}
-	{/if}{#if pdf}
+	{/if}
+	{#if pdf}
 		<a href={pdf}>{title} <Fa icon={faFilePdf} size="0.8x" class="inline-block" /></a>
-	{:else}{title}{/if}
+	{:else}
+		{title}
+	{/if}
 	{#if abstract}
 		<Abstract {abstract} />
 	{/if}
