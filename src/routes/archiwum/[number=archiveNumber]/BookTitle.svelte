@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SvelteMarkdown from 'svelte-markdown';
+	import { marked } from 'marked';
 	import Fa from 'svelte-fa';
 	import { faBookmark } from '@fortawesome/pro-solid-svg-icons';
 	import type { FormattedBookTypes } from './utils/Book';
@@ -23,6 +23,6 @@
 		{/if}
 	</h4>
 	{#if active.notes}
-		<SvelteMarkdown source={active.notes} />
+		{@html marked.parse(active.notes)}
 	{/if}
 {/if}

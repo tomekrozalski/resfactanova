@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import SvelteMarkdown from 'svelte-markdown';
+	import { marked } from 'marked';
 	import Fa from 'svelte-fa';
 	import { faCaretDown } from '@fortawesome/pro-solid-svg-icons';
 
@@ -27,6 +27,6 @@
 </button>
 {#if isAbstractVisible}
 	<div class="" transition:slide>
-		<SvelteMarkdown source={abstract} />
+		{@html marked.parse(abstract)}
 	</div>
 {/if}
