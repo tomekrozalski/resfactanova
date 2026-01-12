@@ -9,6 +9,8 @@ const getArticlesByNumber = (number: number) => `
 						slug
 					}
 				}
+				customDocPath
+				customDocUrl
 				pdf {
 					url
 				}

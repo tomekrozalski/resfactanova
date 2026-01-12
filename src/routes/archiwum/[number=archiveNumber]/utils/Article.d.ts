@@ -6,6 +6,8 @@ export type RawArticleTypes = {
 			slug: string;
 		}[];
 	};
+	customDocPath: string;
+	customDocUrl: string;
 	pdf?: {
 		url: string;
 	};
