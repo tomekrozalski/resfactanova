@@ -10,7 +10,7 @@ import type { FormattedArticleTypes } from './utils/Article.d';
 import { createClient } from 'redis';
 import { REDIS_URL } from '$env/static/private';
 
-const redis = REDIS_URL ? await createClient({ url: REDIS_URL }).connect() : null;
+const redis = await createClient({ url: REDIS_URL }).connect();
 
 export const load = async ({ params }) => {
 	const number = params.number;
@@ -20,7 +20,7 @@ export const load = async ({ params }) => {
 	}
 
 	const REDIS_KEY = 'book' + ':' + number;
-	const cache = redis ? await redis.get(REDIS_KEY) : null;
+	const cache = await redis.get(REDIS_KEY);
 
 	if (cache) {
 		return JSON.parse(cache);
@@ -55,9 +55,7 @@ export const load = async ({ params }) => {
 		title: page.title as string
 	};
 
-	if (redis) {
-		await redis.set(REDIS_KEY, JSON.stringify(data));
-	}
+	await redis.set(REDIS_KEY, JSON.stringify(data));
 
 	return data;
 };

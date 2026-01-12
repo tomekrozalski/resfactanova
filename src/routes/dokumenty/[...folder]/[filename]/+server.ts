@@ -2,7 +2,7 @@ import { findArticleByDocPath } from './find-article-by-doc-path';
 import { createClient } from 'redis';
 import { REDIS_URL } from '$env/static/private';
 
-const redis = REDIS_URL ? await createClient({ url: REDIS_URL }).connect() : null;
+const redis = await createClient({ url: REDIS_URL }).connect();
 
 function extractGoogleDriveFileId(url: string): string | null {
 	const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
@@ -14,7 +14,7 @@ export async function GET({ params }) {
 	const docPath = folder ? `/${folder}/${filename}` : `/${filename}`;
 
 	const REDIS_KEY = `doc-url:${docPath}`;
-	const cachedUrl = redis ? await redis.get(REDIS_KEY) : null;
+	const cachedUrl = await redis.get(REDIS_KEY);
 
 	let customDocUrl: string | null;
 
@@ -23,7 +23,7 @@ export async function GET({ params }) {
 	} else {
 		customDocUrl = await findArticleByDocPath(docPath);
 
-		if (customDocUrl && redis) {
+		if (customDocUrl) {
 			await redis.set(REDIS_KEY, customDocUrl, { EX: 3600 }); // Cache na 1h
 		}
 	}
