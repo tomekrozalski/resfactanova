@@ -1,6 +1,6 @@
 const getArticlesByNumber = (number: number) => `
 	{
-		articleCollection(order: sys_firstPublishedAt_ASC, where: { book: { resFactaNumber: ${number} }}) {
+		articleCollection(order: sys_publishedAt_ASC, where: { book: { resFactaNumber: ${number} }}) {
 			items {
 				abstract
 				authorsCollection(limit: 10) {
